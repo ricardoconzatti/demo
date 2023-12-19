@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>homer demo</title>
+		<style>
+			.button {
+				display: inline-block;
+				cursor: pointer;
+				width: 100px;
+				height: 100px;
+				margin: 0 75px;
+				vertical-align: middle;
+			}
+			.container {
+				text-align: center;
+				margin-top: 50px;
+			}
+			.hidden {
+				display: none;
+			}
+			.homer-image {
+				width: 400px;
+				height: 350px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.footer {
+				position: fixed;
+				bottom: 10px;
+				width: 100%;
+				text-align: center;
+				font-size: 12px;
+				font-family: Arial, sans-serif;
+			}
+			.footer a {
+				text-decoration: none;
+				color: black;
+				transition: background-color 0.3s, color 0.3s;
+				background-color: white;
+				padding: 5px 10px;
+				border-radius: 5px;
+			}
+			.footer a:hover {
+				background-color: black;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div>
+				<img class="button" src="img/thumbs_up.png" onclick="showimage('image1')" />
+				<img class="button" src="img/thumbs_down.png" onclick="showimage('image2')" />
+			</div>
+			<div>
+				<img id="image1" class="hidden homer-image" src="img/homer_happy.jpg" />
+				<img id="image2" class="hidden homer-image" src="img/homer_sad.jpg" />
+			</div>
+			<div class="footer">
+				<a href="https://conzatech.com" target="_blank">Ricardo Conzatti | conzatech.com | v1.0</a>
+			</div>
+			<script>
+				var homerImage;
+				function showimage(idImage) {
+					var image = document.getElementById(idImage);
+					if (homerImage) {
+						homerImage.classList.add("hidden");
+					}
+					image.classList.remove("hidden");
+					homerImage = image;
+				}
+			</script>
+		</div>
+	</body>
+</html>
