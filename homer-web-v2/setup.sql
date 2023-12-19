@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS homer_db;
+USE homer_db;
+
+CREATE TABLE IF NOT EXISTS thumbs (
+    code INT AUTO_INCREMENT PRIMARY KEY,
+    status VARCHAR(50),
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE USER 'homer'@'localhost' IDENTIFIED BY 'homerJayS123';
+GRANT ALL PRIVILEGES ON homer_db.thumbs TO 'homer'@'localhost';
+FLUSH PRIVILEGES;
