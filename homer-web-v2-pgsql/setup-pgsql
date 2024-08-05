@@ -1,0 +1,15 @@
+CREATE DATABASE homer_db;
+
+\c homer_db
+
+CREATE TABLE thumbs ( code SERIAL PRIMARY KEY, status VARCHAR(50), date TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+
+GRANT ALL PRIVILEGES ON TABLE thumbs TO homer;
+
+CREATE USER homer WITH PASSWORD 'homerJayS123';
+
+GRANT ALL PRIVILEGES ON DATABASE homer_db TO homer;
+
+SELECT relname FROM pg_class WHERE relkind = 'S';
+
+GRANT USAGE, SELECT ON SEQUENCE thumbs_code_seq TO homer;
