@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homer-demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer-db
+  namespace: homer-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homer-db
+  template:
+    metadata:
+      labels:
+        app: homer-db
+    spec:
+      containers:
+      - name: homer-db
+        image: ricardoconzatti/homer-web:pgsql
+        ports:
+        - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homer-db
+  namespace: homer-demo
+spec:
+  selector:
+    app: homer-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homer-web
+  namespace: homer-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homer-web
+  template:
+    metadata:
+      labels:
+        app: homer-web
+    spec:
+      containers:
+      - name: homer-web
+        image: ricardoconzatti/homer-web:apache-php
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homer-web
+  namespace: homer-demo
+spec:
+  selector:
+    app: homer-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
