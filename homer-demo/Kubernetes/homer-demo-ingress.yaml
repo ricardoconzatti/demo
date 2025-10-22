@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homer-demo-ingress
+  namespace: homer-demo
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: homer.caverna.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: homer-web
+            port:
+              number: 80
