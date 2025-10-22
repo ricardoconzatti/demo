@@ -1,0 +1,14 @@
+services:
+  homer-db:
+    image: ricardoconzatti/homer-web:pgsql
+    container_name: homer-db
+    ports:
+      - "5432:5432"
+
+  homer-web:
+    image: ricardoconzatti/homer-web:apache-php
+    container_name: homer-web
+    depends_on:
+      - homer-db
+    ports:
+      - "80:80"
