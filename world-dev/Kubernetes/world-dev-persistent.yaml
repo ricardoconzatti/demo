@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: world-dev
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: world-database-pvc
+  namespace: world-dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-database
+  namespace: world-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: world-database
+  template:
+    metadata:
+      labels:
+        app: world-database
+    spec:
+      containers:
+      - name: world-database
+        image: ricardoconzatti/world-dev:mysql
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: world-database-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: world-database-volume
+        persistentVolumeClaim:
+          claimName: world-database-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: world-database
+  namespace: world-dev
+spec:
+  selector:
+    app: world-database
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-app
+  namespace: world-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: world-app
+  template:
+    metadata:
+      labels:
+        app: world-app
+    spec:
+      containers:
+      - name: world-app
+        image: ricardoconzatti/world-dev:nodejs
+        ports:
+        - containerPort: 3022
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: world-app
+  namespace: world-dev
+spec:
+  selector:
+    app: world-app
+  ports:
+    - protocol: TCP
+      port: 3022
+      targetPort: 3022
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-cache
+  namespace: world-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: world-cache
+  template:
+    metadata:
+      labels:
+        app: world-cache
+    spec:
+      containers:
+      - name: world-app
+        image: ricardoconzatti/world-dev:redis
+        ports:
+        - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: world-cache
+  namespace: world-dev
+spec:
+  selector:
+    app: world-cache
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
