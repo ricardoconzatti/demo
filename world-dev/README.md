@@ -39,6 +39,11 @@ kubectl edit ingress world-dev-ingress -n world-dev
 - world-dev:redis
 - world-dev:mysql
 
+**linux/arm64**
+- world-dev:nodejs-arm
+- world-dev:redis-arm
+- world-dev:mysql-arm
+
 ## Important
 - I know no one would actually deploy community script in production, but I have to say it anyway: this demo app was built for non-production environments.
 - Information about countries is fetched from the restcountries.com API, and for city geolocation, it comes from another API called openstreetmap.org, based on the name you enter when adding a new city. Discrepancies might occur beyond my control.
