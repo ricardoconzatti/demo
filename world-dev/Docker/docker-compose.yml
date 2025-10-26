@@ -1,0 +1,22 @@
+services:
+  world-database:
+    image: ricardoconzatti/world-dev:mysql
+    container_name: world-database
+    ports:
+      - "3306:3306"
+
+  world-cache:
+    image: ricardoconzatti/world-dev:redis
+    container_name: world-cache
+    ports:
+      - "6379:6379"
+
+  world-app:
+    image: ricardoconzatti/world-dev:nodejs
+    container_name: world-app
+    depends_on:
+      - world-cache
+      - world-database
+    command: sh -c "sleep 10 && node app.js"
+    ports:
+      - "3022:3022"
