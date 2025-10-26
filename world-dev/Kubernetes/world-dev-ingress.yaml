@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: world-dev-ingress
+  namespace: world-dev
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: world.caverna.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: world-app
+            port:
+              number: 3022
