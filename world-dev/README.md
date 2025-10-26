@@ -1,6 +1,9 @@
 This is a MVP of world.conza.xyz just for a demo application in containers, featuring a web application with Node.js 20, MySQL 9 database and Redis 7 for cache.
 
 ---
+## Access
+- URL: https:// + defined IP/Port or FQDN (eg. https://world.caverna.local)
+- Credentials: demo/demo
 
 ## Docker
 
@@ -21,7 +24,7 @@ kubectl apply -f https://raw.githubusercontent.com/ricardoconzatti/demo/refs/hea
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/ricardoconzatti/demo/refs/heads/main/world-dev/Kubernetes/world-dev.yaml
 ```
-**Ingress example** (Access: https://world.caverna.local | Default admin user: demo | Default admin password: demo)
+**Ingress example**
 ```bash
 kubectl apply -f https://github.com/ricardoconzatti/demo/blob/main/world-dev/Kubernetes/world-dev-ingress.yaml
 ```
