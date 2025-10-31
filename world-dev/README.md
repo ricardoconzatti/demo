@@ -26,7 +26,7 @@ kubectl apply -f https://raw.githubusercontent.com/ricardoconzatti/demo/refs/hea
 ```
 **Ingress example**
 ```bash
-kubectl apply -f https://github.com/ricardoconzatti/demo/blob/main/world-dev/Kubernetes/world-dev-ingress.yaml
+kubectl apply -f https://raw.githubusercontent.com/ricardoconzatti/demo/refs/heads/main/world-dev/Kubernetes/world-dev-ingress.yaml
 ```
 **Edit the ingress if needed**
 ```bash
