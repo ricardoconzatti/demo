@@ -2,7 +2,7 @@ This is a MVP of world.conza.xyz just for a demo application in containers, feat
 
 ---
 ## Access
-- URL: https:// + defined IP/Port or FQDN (eg. https://world.caverna.local)
+- URL: https:// + FQDN (eg. https://world.caverna.local)
 - Credentials: demo/demo
 
 ## Docker
